@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID-SIGHT | Secure Intelligence</title>
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark-grey: #1a1a1a;
+            --radiant-blue: #00d4ff;
+            --gold: #ffcc00;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid var(--dark-grey);
+            animation: borderBlink 2s infinite alternate;
+        }
+
+        @keyframes borderBlink {
+            from { border-color: var(--dark-grey); }
+            to { border-color: var(--radiant-blue); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            margin: 0;
+            color: var(--white);
+        }
+
+        .header p {
+            color: var(--radiant-blue);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .main-content {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layout for Services */
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .service-box {
+            background: var(--dark-grey);
+            border: 1px solid #333;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-box:hover {
+            border-color: var(--radiant-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .service-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .service-box .price {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        /* Ticker Section */
+        .ticker-wrap {
+            background: #000;
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            margin-top: 40px;
+        }
+
+        .ticker {
+            display: inline-block;
+            padding-left: 100%;
+            animation: tickerScroll 30s linear infinite;
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0);  }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--black);
+            border: 2px solid var(--radiant-blue);
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .qr-placeholder {
+            margin: 20px 0;
+            border: 5px solid var(--gold);
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .qr-placeholder img {
+            width: 200px;
+            height: 200px;
+            display: block;
+        }
+
+        .wallet-box {
+            background: #111;
+            border: 1px dashed var(--radiant-blue);
+            color: var(--radiant-blue);
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            word-break: break-all;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background: white;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>VOID-SIGHT</h1>
+        <p>Secure Intelligence & Deployment</p>
+    </div>
+
+    <div class="main-content">
+        <div class="services-list">
+            <div class="service-box" onclick="selectProduct('Android Zero-Click', '1,300')">
+                <h3>Android Zero-Click</h3>
+                <span class="price">$1,300</span>
+                <p style="color: var(--gold);">Payment: BTC</p>
+            </div>
+            <div class="service-box" onclick="selectProduct('Android Single-Click', '1,100')">
+                <h3>Android Single-Click</h3>
+                <span class="price">$1,100</span>
+                <p style="color: var(--gold);">Payment: BTC</p>
+            </div>
+            <div class="service-box" onclick="selectProduct('IOS Zero-Click', '2,500')">
+                <h3>IOS Zero-Click</h3>
+                <span class="price">$2,500</span>
+                <p style="color: var(--gold);">Payment: BTC</p>
+            </div>
+            <div class="service-box" onclick="selectProduct('iOS Memory Corruption', '1,200')">
+                <h3>iOS Memory Corruption</h3>
+                <span class="price">$1,200</span>
+                <p style="color: var(--gold);">Payment: BTC</p>
+            </div>
+            <div class="service-box" onclick="selectProduct('Windows Kernel Access', '1,900')">
+                <h3>Windows Kernel Access</h3>
+                <span class="price">$1,900</span>
+                <p style="color:  var(--gold);">Payment: BTC</p>
+            </div>
+            <div class="service-box" onclick="selectProduct('Ransomware All Package', '1500')">
+                <h3>Ransomware All Package</h3>
+                <span class="price">$1500</span>
+                <p style="color: var(--gold);">Payment: BTC</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker" id="tickerContent"></div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="purchaseModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--gold);">CHECKOUT</h2>
+            <p id="itemSelected" style="font-size: 1.2rem;"></p>
+            <p id="priceSelected" style="font-size: 1.5rem; color: #00ff00; font-weight: bold;"></p>
+
+            <div class="qr-placeholder">
+                <img id="qrImage" src="" alt="QR Code">
+            </div>
+
+            <p style="font-size: 0.9rem; color: #aaa;">Send BTC to the following address:</p>
+            <div class="wallet-box" id="walletAddress">bc1q_default_address</div>
+            
+            <button class="copy-btn" onclick="copyAddress()">COPY WALLET ADDRESS</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. UPDATE YOUR WALLETS HERE
+        const walletMapping = {
+            "Android Zero-Click": "bc1qesk9kuuxczsxz8md670m3nnz0zcuu325az3wrq", 
+            "Android Single-Click": "bc1qesk9kuuxczsxz8md670m3nnz0zcuu325az3wrq",
+            "IOS Zero-Click": "bc1qesk9kuuxczsxz8md670m3nnz0zcuu325az3wrq",
+            "iOS Memory Corruption": "bc1qesk9kuuxczsxz8md670m3nnz0zcuu325az3wrq",
+            "Windows Kernel Access": "bc1qesk9kuuxczsxz8md670m3nnz0zcuu325az3wrq",
+            "Ransomware All Package": "bc1qesk9kuuxczsxz8md670m3nnz0zcuu325az3wrq"
+        };
+
+        const products = ["Android Zero-Click", "Windows Kernel Access", "IOS Zero-Click", "Ransomware All Package", "Android Single-Click"];
+        const tickerEl = document.getElementById('tickerContent');
+        
+        function generateTicker() {
+            let content = "";
+            for(let i=0; i<15; i++) {
+                const userNum = Math.floor(Math.random() * 1000);
+                const prod = products[Math.floor(Math.random() * products.length)];
+                content += `<span style="color:white; margin-right: 50px;">USER_${userNum} bought <span style="color:var(--radiant-blue)">${prod}</span></span>`;
+            }
+            tickerEl.innerHTML = content;
+        }
+        generateTicker();
+
+        function selectProduct(name, price) {
+            // Find the wallet for the selected product
+            const walletAddress = walletMapping[name] || "bc1q_default_address";
+            
+            // Update Modal Content
+            document.getElementById('itemSelected').innerText = name;
+            document.getElementById('priceSelected').innerText = '$' + price;
+            document.getElementById('walletAddress').innerText = walletAddress;
+            
+            // Update QR Code automatically based on address
+            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${walletAddress}`;
+            
+            document.getElementById('purchaseModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        function copyAddress() {
+            const addressText = document.getElementById('walletAddress').innerText;
+            navigator.clipboard.writeText(addressText).then(() => {
+                alert('Wallet Address Copied to Clipboard!');
+            }).catch(err => {
+                alert('Error copying address: ' + err);
+            });
+        }
+
+        // Close modal if clicking outside of the content
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('purchaseModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
